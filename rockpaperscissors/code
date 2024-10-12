@@ -1,0 +1,124 @@
+/**
+ * 
+ */
+package projects.rockpaperscissors;
+
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ * 
+ */
+public class RockPaperScissors {
+
+	public static void main(String[] args) {
+
+		String guess = "";
+		Scanner scan = new Scanner(System.in);
+		int num = 5;
+		boolean isRock = false;
+		boolean isPaper = false;
+		boolean isScissors = false;
+		boolean isRock1 = false;
+		boolean isPaper1 = false;
+		boolean isScissors1 = false;
+		int counter = 0;
+		int compCount = 0;
+		Random rand = new Random();
+		int random;
+		String comp = "";
+		
+		System.out.println("Welcome to Rock, Paper, Scissors!");
+
+		for (int i = 0; i < 5; i++) {
+			random = rand.nextInt(3);
+			if (random == 0) {
+				comp = "paper";
+			}
+			if (random == 1) {
+				comp = "rock";
+			}
+			if (random == 2) {
+				comp = "scissors";
+			}
+			System.out.println("Choose rock, paper, or scissors.");
+			guess = scan.nextLine();
+
+			switch (guess) {
+			case "rock":
+				isRock = true;
+				break;
+			case "scissors":
+				isScissors = true;
+				break;
+			case "paper":
+				isPaper = true;
+				break;
+			default:
+				System.out.println("Invalid entry.");
+				break;
+			}
+
+			switch (comp) {
+			case "rock":
+				isRock1 = true;
+				break;
+			case "scissors":
+				isScissors1 = true;
+				break;
+			case "paper":
+				isPaper1 = true;
+				break;
+			default:
+				System.out.println("Invalid entry.");
+				break;
+			}
+
+			if ((isRock == true && isScissors1 == true) || (isPaper == true && isRock1 == true)
+					|| (isScissors == true && isPaper1 == true)) {
+				isRock = false;
+				isScissors1 = false;
+				isPaper = false;
+				isRock1 = false;
+				isScissors = false;
+				isPaper1 = false;
+				num--;
+				System.out.println("You win! Computer chose " + comp + ". You have " + num + " turns left.");
+				counter++;
+
+			} else if ((isRock == true && isPaper1 == true) || (isPaper == true && isScissors1 == true)
+					|| (isScissors == true && isRock1 == true)) {
+				isRock = false;
+				isScissors1 = false;
+				isPaper = false;
+				isRock1 = false;
+				isScissors = false;
+				isPaper1 = false;
+				num--;
+				System.out.println("You lose. Computer chose " + comp + " . You have " + num + " turns left.");
+				compCount++;
+			} else {
+				isRock = false;
+				isScissors1 = false;
+				isPaper = false;
+				isRock1 = false;
+				isScissors = false;
+				isPaper1 = false;
+				num--;
+				System.out.println("Tie! Computer chose " + comp + " too. You have " + num + " turns left.");
+			}
+			comp = "";
+		}
+
+		if (counter > compCount) {
+			System.out.println("Game is over! You won " + counter + " to " + compCount + "");
+		} else if (counter < compCount) {
+			System.out.println("Game is over! You lost " + counter + " to " + compCount + ".");
+		} else {
+			System.out.println("Game is over! You tied.");
+		}
+		scan.close();
+
+	}
+
+}
